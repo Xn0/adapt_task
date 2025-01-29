@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 from .carrier import CarrierABC
 from .models import ResultStatus, ResultModel
 
-
 START_PAGE_INDEX = 1
 URL_TEMPLATE = 'https://scraping-interview.onrender.com/placeholder_carrier/<customerId>/policies/<page>'
 SINGLE_CSS_MAPPING = {

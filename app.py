@@ -3,8 +3,6 @@ import json
 
 from scraper.scraper import Worker
 
-import json
-
 
 def process_file(file_path):
     try:
