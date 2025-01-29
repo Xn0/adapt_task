@@ -1,0 +1,18 @@
+[
+	{
+	"carrier": "MOCK_INDEMNITY",
+	"customerId": "a0dfjw9a"
+	},
+	{
+  "carrier": "PLACEHOLDER_CARRIER",
+	"customerId": "f02dkl4e"
+	},
+	{
+  "carrier": "123",
+	"customerId": "f02dkl4e"
+	},
+	{
+  "carrier": "PLACEHOLDER_CARRIER",
+	"customerId": "f02dkl4e123"
+	}
+]
