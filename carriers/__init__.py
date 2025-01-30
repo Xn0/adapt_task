@@ -1,18 +1,16 @@
-from typing import Type
-
-from .mock_ind import MockInd
-from .placeholder_car import PlaceholderCar
-from .carrier import CarrierABC
+from .models import ParserConfig
+from .mock_ind import config as mock_conf
+from .placeholder_car import config as placeholder_conf
 
 CARRIER_MAPPING = {
-    'MOCK_INDEMNITY': MockInd,
-    'PLACEHOLDER_CARRIER': PlaceholderCar,
+    'MOCK_INDEMNITY': mock_conf,
+    'PLACEHOLDER_CARRIER': placeholder_conf,
 }
 
 
-def get_carrier(carrier_id: str) -> Type[CarrierABC] | None:
+def get_carrier_conf(carrier_id: str) -> ParserConfig | None:
     if carrier_id not in CARRIER_MAPPING:
         print(f'Error: {carrier_id=} not found')
-        return
+        return None
 
     return CARRIER_MAPPING[carrier_id]

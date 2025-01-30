@@ -1,20 +1,31 @@
 from dataclasses import dataclass, field
-from enum import Enum
-from datetime import datetime, UTC
 
-
-class ResultStatus(Enum):
-    done = 'done'
-    pending = 'pending'
-    error = 'error'
+from scraper.selectors import BaseElementSelector
+from scraper.extractors import BaseValueExtractor
+from scraper.validators import BaseValidator
+from scraper.converters import BaseConverter
 
 
 @dataclass
-class ResultModel:
-    status: ResultStatus
-    carrier: str | None
-    arguments: dict
-    timestamp: datetime = field(default_factory=lambda: datetime.now(UTC).isoformat())
-    data: dict | None = None
-    urls: list[str] = field(default_factory=list)
-    errors: list[str] = field(default_factory=list)
+class FieldConfig:
+    name: str
+    extractor: BaseValueExtractor
+    selector: BaseElementSelector | None = None
+    validators: list[BaseValidator] = field(default_factory=list)
+    converter: BaseConverter | None = None
+
+
+@dataclass
+class DataConfig:
+    name: str
+    fields: list[FieldConfig]
+    array: bool = False
+    container_selector: BaseElementSelector | None = None
+
+
+@dataclass
+class ParserConfig:
+    url_template: str
+    multipage: bool
+    data: list[DataConfig]
+    start_page: int | None = None

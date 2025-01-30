@@ -4,8 +4,9 @@ import json
 
 from dataclasses import asdict
 
-from carriers import get_carrier
-from carriers.mock_ind import ResultModel, ResultStatus
+from carriers import get_carrier_conf
+from .models import ResultModel, ResultStatus
+from .extractor import Extractor
 
 
 class Worker:
@@ -23,8 +24,8 @@ class Worker:
 
     def add_tasks(self, tasks: list[dict]) -> None:
         for task in tasks:
-            carrier = get_carrier(task.get('carrier'))
-            if not carrier:
+            carrier_conf = get_carrier_conf(task.get('carrier'))
+            if not carrier_conf:
                 self.scraped_data.append(
                     ResultModel(
                         status=ResultStatus.error.value,
@@ -34,7 +35,7 @@ class Worker:
                     )
                 )
             else:
-                self.tasks.append(carrier(task))
+                self.tasks.append(Extractor(task, carrier_conf))
 
     def run_tasks(self) -> None:
         if not self.tasks:
