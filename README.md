@@ -1,6 +1,9 @@
 # Web Scraper
 
 A Python-based web scraper that extracts data using BeautifulSoup4.
+Take home task from AdaptAPI company. 
+The task was to write web scraping solution.
+Lime limits 6 hour.
 
 ## Prerequisites
 
